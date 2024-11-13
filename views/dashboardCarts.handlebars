@@ -1,0 +1,54 @@
+<!-- /views/dashboardCarts.handlebars -->
+
+{{> header}}
+
+<div class="container">
+  <div class="cart-management">
+    <h2>Mi Carrito</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cart.products}}
+        <tr>
+          <td>{{this.product.title}}</td>
+          <td>{{this.quantity}}</td>
+          <td>${{this.product.price}}</td>
+          <td>${{multiply this.quantity this.product.price}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <button id="complete-purchase-btn">Finalizar Compra</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('complete-purchase-btn').addEventListener('click', () => {
+    fetch(`/api/carts/{{cart._id}}/purchase`, {
+      method: 'POST',
+      headers: {
+        // Ya no es necesario el token si usamos sesiones
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+        if (data.failedProducts && data.failedProducts.length > 0) {
+          alert('Algunos productos no pudieron ser comprados debido a falta de stock.');
+        }
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error en la solicitud:', error);
+      });
+  });
+</script>

@@ -1,0 +1,45 @@
+<!-- /views/dashboardProducts.handlebars -->
+
+{{> header}}
+
+<div class="container">
+  <div class="product-management">
+    <h2>Gestión de Productos</h2>
+    <button id="add-product-btn">Agregar Producto</button>
+	<br>
+	</br>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Código</th>
+          <th>Precio</th>
+          <th>Categoría</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="product-list">
+        {{#each products}}
+        <tr>
+          <td>{{this.title}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.code}}</td>
+          <td>${{this.price}}</td>
+          <td>{{this.category}}</td>
+          <td>{{this.stock}}</td>
+          <td>
+            <button class="delete-btn" data-id="{{this._id}}">Eliminar</button>
+            <!-- Agregar el botón "Agregar al carrito" -->
+            <button class="add-to-cart-btn" data-id="{{this._id}}">Agregar al carrito</button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="/js/dashboard.js"></script>
