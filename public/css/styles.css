@@ -1,4 +1,4 @@
-/* Reset de estilos básicos */
+/* Estilos del DashBoard */
 * {
   margin: 0;
   padding: 0;
@@ -19,9 +19,9 @@ body {
   padding: 20px 0;
 }
 
-/* Header - Cambiado de verde a negro */
+/* Header */
 header {
-  background-color: #000000; /* Negro */
+  background-color: #000000;
   color: white;
   padding: 20px 0;
   margin-bottom: 20px;
@@ -52,7 +52,7 @@ nav a:hover {
 h2 {
   margin-bottom: 20px;
   text-align: center;
-  color: #000000; /* Cambiado a negro para consistencia */
+  color: #000000;
 }
 
 /* Tablas */
@@ -78,16 +78,16 @@ th {
   background-color: #f2f2f2;
 }
 
-/* Botones - Cambiado de verde a negro */
+/* Botones */
 button {
-  background-color: #000000; /* Negro */
+  background-color: #000000; 
   color: white;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 14px;
-  transition: background-color 0.3s ease; /* Para la transición suave del hover */
+  transition: background-color 0.3s ease; /* transicion de hover */
 }
 
 /* Hover para los botones - aclarar un poco */
@@ -95,7 +95,7 @@ button:hover {
   background-color: #333333; /* Aclarar un poco el negro */
 }
 
-/* Botones específicos - Cambiar todos a negro */
+/* Botones específicos */
 
 /* Botón Editar */
 .edit-btn {
@@ -128,7 +128,7 @@ button:hover {
 }
 
 
-/* Formularios */
+/* Forms */
 input,
 select {
   padding: 10px;
@@ -153,7 +153,7 @@ footer {
   margin-top: 20px;
 }
 
-/* Estilos para el botón "Agregar Producto" - Cambiado de verde a negro */
+/* Estilos para el botón "Agregar Producto" */
 .btn-add-product {
   background-color: #000000; /* Negro */
   color: white;
@@ -161,15 +161,15 @@ footer {
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  margin-bottom: 20px; /* Añadir margen inferior para separar el botón de la tabla */
+  margin-bottom: 20px; /* Añadimos un margen inferior para separar el botón de la tabla */
   transition: background-color 0.3s ease;
 }
 
 .btn-add-product:hover {
-  background-color: #333333; /* Aclarar un poco el negro */
+  background-color: #333333; /* Aclarar un poco el negro al hacer el hover */
 }
 
-/* Estilos del modal */
+/* Estilos del modal con el form para agrgar producto */
 .modal {
   display: none;
   position: fixed;
