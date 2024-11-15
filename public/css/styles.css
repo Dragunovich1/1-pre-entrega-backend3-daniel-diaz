@@ -1,5 +1,3 @@
-/* /public/css/styles.css */
-
 /* Reset de estilos básicos */
 * {
   margin: 0;
@@ -21,9 +19,9 @@ body {
   padding: 20px 0;
 }
 
-/* Header */
+/* Header - Cambiado de verde a negro */
 header {
-  background-color: #4CAF50;
+  background-color: #000000; /* Negro */
   color: white;
   padding: 20px 0;
   margin-bottom: 20px;
@@ -54,7 +52,7 @@ nav a:hover {
 h2 {
   margin-bottom: 20px;
   text-align: center;
-  color: #4CAF50;
+  color: #000000; /* Cambiado a negro para consistencia */
 }
 
 /* Tablas */
@@ -80,45 +78,55 @@ th {
   background-color: #f2f2f2;
 }
 
-/* Botones */
+/* Botones - Cambiado de verde a negro */
 button {
-  background-color: #4CAF50;
+  background-color: #000000; /* Negro */
   color: white;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 14px;
+  transition: background-color 0.3s ease; /* Para la transición suave del hover */
 }
 
+/* Hover para los botones - aclarar un poco */
 button:hover {
-  background-color: #45a049;
+  background-color: #333333; /* Aclarar un poco el negro */
 }
 
-/* Botones específicos */
-.delete-btn {
-  background-color: #f44336;
-}
+/* Botones específicos - Cambiar todos a negro */
 
-.delete-btn:hover {
-  background-color: #e53935;
-}
-
+/* Botón Editar */
 .edit-btn {
-  background-color: #ffc107;
+  background-color: #000000; /* Negro */
+  color: white;
 }
 
 .edit-btn:hover {
-  background-color: #e0a800;
+  background-color: #333333; /* Aclarar un poco el negro */
 }
 
+/* Botón Agregar al Carrito */
 .add-cart-btn {
-  background-color: #5bc0de;
+  background-color: #000000; /* Negro */
+  color: white;
 }
 
 .add-cart-btn:hover {
-  background-color: #31b0d5;
+  background-color: #333333; /* Aclarar un poco el negro */
 }
+
+/* Botón Eliminar */
+.delete-btn {
+  background-color: #000000; /* Negro */
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #333333; /* Aclarar un poco el negro */
+}
+
 
 /* Formularios */
 input,
@@ -133,7 +141,7 @@ select {
 input:focus,
 select:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #000000; /* Cambiado a negro para mantener el estilo */
 }
 
 /* Footer */
@@ -145,71 +153,64 @@ footer {
   margin-top: 20px;
 }
 
-/* /public/css/styles.css */
-
-/* Estilos generales */
-.container {
-  margin: 20px;
-}
-
-/* Estilos para el botón "Agregar Producto" */
+/* Estilos para el botón "Agregar Producto" - Cambiado de verde a negro */
 .btn-add-product {
-  background-color: #4CAF50;
+  background-color: #000000; /* Negro */
   color: white;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   margin-bottom: 20px; /* Añadir margen inferior para separar el botón de la tabla */
+  transition: background-color 0.3s ease;
 }
 
 .btn-add-product:hover {
-  background-color: #45a049;
+  background-color: #333333; /* Aclarar un poco el negro */
 }
 
 /* Estilos del modal */
 .modal {
-  display: none; /* Oculto por defecto */
-  position: fixed; /* Fijado en la ventana del navegador */
-  z-index: 1; /* Sobre otros elementos */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Ancho completo */
-  height: 100%; /* Alto completo */
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Contenido del modal */
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto; /* Centrar verticalmente */
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 35%; /* Ancho del modal reducido para mejor visualización */
-  max-height: 75vh; /* Altura máxima del modal ajustada */
-  overflow-y: auto; /* Habilitar scroll vertical */
-  border-radius: 15px; /* Bordes más redondeados */
+  width: 35%;
+  max-height: 75vh;
+  overflow-y: auto;
+  border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  scrollbar-width: none; /* Ocultar scrollbar en Firefox */
+  scrollbar-width: none;
 }
 
-/* Estilo del scroll para navegadores basados en WebKit (Chrome, Safari) */
 .modal-content::-webkit-scrollbar {
-  width: 4px; /* Reducir el ancho del scrollbar para que sea menos intrusivo */
+  width: 4px;
 }
 
 .modal-content::-webkit-scrollbar-track {
-  background: transparent; /* Fondo transparente para el track del scrollbar */
+  background: transparent;
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-  background: #bbb; /* Color del pulgar del scrollbar */
-  border-radius: 10px; /* Bordes redondeados del pulgar */
-  border: 2px solid transparent; /* Crear un espacio alrededor para que no interfiera con el borde */
+  background: #bbb;
+  border-radius: 10px;
+  border: 2px solid transparent;
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover {
-  background: #888; /* Color del pulgar del scrollbar al pasar el cursor */
+  background: #888;
 }
 
 /* Botón de cerrar modal */

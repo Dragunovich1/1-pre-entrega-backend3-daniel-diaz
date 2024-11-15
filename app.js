@@ -88,6 +88,10 @@ mongoose
         eq: (a, b) => a === b,
         json: (context) => JSON.stringify(context, null, 2),
       },
+      runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true,
+      },
     });
 
     app.engine('handlebars', hbs.engine);
