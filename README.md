@@ -2,15 +2,15 @@ Proyecto Final - CoderHouse - Backend 3
 
 Alumno: Daniel Diaz
 
-Comisión: 70020
+Comisión: 70060
 
-Docente: Luis Alejandro Mera
+Docente: Daniel Villajuan
 
-Tutores: Abigail Salas, Alexis Coronel
+Tutores: Juan Pablo Tuttolomondo, Federico Interlandi Zoireff, Ivan Passalia
 
 Descripción del Proyecto
 
-Este proyecto es un servidor básico de e-commerce desarrollado con Node.js y Express. Permite gestionar productos y carritos de compra, ofreciendo funcionalidades como la adición, eliminación y actualización de productos en tiempo real mediante WebSockets.
+Este proyecto es un servidor básico de e-commerce con dashboard desarrollado con Node.js y Express. Permite gestionar productos y carritos de compra, ofreciendo funcionalidades como la adición, eliminación y actualización de productos en tiempo real mediante WebSockets.
 
 Instalación
 
