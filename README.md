@@ -1,4 +1,4 @@
-# Proyecto Final - CoderHouse - Backend 2
+# Proyecto Final - CoderHouse - Backend 3
 
 Alumno: Daniel Diaz
 
@@ -24,18 +24,20 @@ Este proyecto es un servidor básico de e-commerce desarrollado con Node.js y Ex
 1. Clonar el repositorio:
 
 
-git clone https://github.com/Dragunovich1/proyecto-final-backend-daniel-diaz
-cd proyecto-final-backend-daniel-diaz
-
+   ```sh
+   git clone https://github.com/Dragunovich1/proyecto-final-backend-daniel-diaz
+   cd proyecto-final-backend-daniel-diaz
+   ```
 
 2. Instalar las dependencias:
 
-npm install
-
+   ```sh
+   npm install
+   ```
 
 3. Configurar la base de datos:
 
-Asegúrate de tener una instancia de MongoDB corriendo. Puedes usar la configuración por defecto en `mongodb://localhost:27017/base_de_datos` o modificar la configuración en `app.js`.
+   Asegúrate de tener una instancia de MongoDB corriendo. Puedes usar la configuración por defecto en `mongodb://localhost:27017/base_de_datos` o modificar la configuración en `app.js`.
 
 ## Ejecución del Servidor
 
@@ -43,17 +45,17 @@ Asegúrate de tener una instancia de MongoDB corriendo. Puedes usar la configura
 
 Para ejecutar el servidor en modo desarrollo (con reinicio automático):
 
-
-npm run dev
-
+   ```sh
+   npm run dev
+   ```
 
 ### Modo Producción
 
 Para ejecutar el servidor en modo producción:
 
-
-npm start
-
+   ```sh
+   npm start
+   ```
 
 El servidor estará corriendo en `http://localhost:8080`.
 
@@ -72,7 +74,7 @@ El servidor estará corriendo en `http://localhost:8080`.
 ### Carrito de Compras
 
 - **URL**: `http://localhost:8080/carts/:cid`
-- **Descripción**: Muestra los productos en el carrito específico. Permite incrementar, decrementar y eliminar productos del carrito.
+- **Descripción**: Muestra los productos en el carrito específico.
 
 ### Detalle de Producto
 
@@ -84,12 +86,17 @@ El servidor estará corriendo en `http://localhost:8080`.
 1. Ejecutar el servidor según el modo elegido.
 2. Acceder a las siguientes rutas desde el navegador:
 
-- `http://localhost:8080` para ver el dashboard con la lista de productos.
-- `http://localhost:8080/realtimeproducts` para gestionar productos en tiempo real.
-- `http://localhost:8080/carts/:cid` para ver y gestionar el carrito de compras.
-- `http://localhost:8080/products/:pid` para ver los detalles de un producto específico.
+   - `http://localhost:8080` para ver el dashboard con la lista de productos.
+   - `http://localhost:8080/realtimeproducts` para gestionar productos en tiempo real.
+   - `http://localhost:8080/carts/:cid` para ver y gestionar el carrito de compras.
+   - `http://localhost:8080/products/:pid` para ver los detalles de un producto específico.
 
 3. La interfaz gráfica del dashboard permite realizar todas las pruebas necesarias para gestionar productos y carritos.
+
+4. Iniciar sesión con el siguiente usuario administrador para realizar las pruebas:
+
+   - **Email**: `admin@example.com`
+   - **Password**: `adminpassword`
 
 ## API y Pruebas Manuales
 
@@ -151,39 +158,12 @@ El servidor estará corriendo en `http://localhost:8080`.
    - **Response**: Devuelve el carrito con el ID especificado.
 
 3. **Agregar producto al carrito**
-   - **URL**: `POST /api/carts/:cid/product/:pid`
+   - **URL**: `POST /api/carts/add/:pid`
    - **Response**: Devuelve el carrito con el producto añadido.
 
 4. **Eliminar un producto del carrito**
    - **URL**: `DELETE /api/carts/:cid/products/:pid`
    - **Response**: Devuelve el carrito con el producto eliminado.
-
-5. **Actualizar productos en el carrito**
-   - **URL**: `PUT /api/carts/:cid`
-   - **Body (JSON)**:
-     ```json
-     {
-       "products": [
-         { "product": "product_id_1", "quantity": 2 },
-         { "product": "product_id_2", "quantity": 5 }
-       ]
-     }
-     ```
-   - **Response**: Devuelve el carrito actualizado.
-
-6. **Actualizar cantidad de un producto en el carrito**
-   - **URL**: `PUT /api/carts/:cid/products/:pid`
-   - **Body (JSON)**:
-     ```json
-     {
-       "quantity": 3
-     }
-     ```
-   - **Response**: Devuelve el carrito con la cantidad actualizada del producto.
-
-7. **Eliminar todos los productos del carrito**
-   - **URL**: `DELETE /api/carts/:cid`
-   - **Response**: Devuelve el carrito vacío.
 
 ### Usuarios
 
@@ -216,6 +196,29 @@ El servidor estará corriendo en `http://localhost:8080`.
    - **URL**: `GET /api/sessions/current`
    - **Response**: Devuelve los datos del usuario autenticado.
 
-## Testing
+## Testing - Set de Pruebas
 
-Para realizar pruebas, utilizar herramientas como Postman o Insomnia para enviar solicitudes HTTP a las rutas de la API.
+### Prueba de Autenticación
+1. Iniciar sesión con el usuario administrador proporcionado.
+2. Verificar que se redirige correctamente al dashboard.
+
+### Pruebas de Productos
+1. **Agregar un nuevo producto**: Desde el dashboard, añadir un producto y verificar que aparezca en la lista de productos.
+2. **Modificar producto existente**: Editar un producto desde la vista de productos y comprobar los cambios.
+3. **Eliminar un producto**: Eliminar un producto y verificar que desaparece de la lista.
+
+### Pruebas de Carrito
+1. **Agregar un producto al carrito**: Seleccionar un producto y agregarlo al carrito.
+2. **Verificar carrito**: Acceder a la vista del carrito y confirmar que los productos agregados están presentes con la cantidad correcta.
+3. **Finalizar compra**: Completar la compra y confirmar que el carrito se vacía.
+
+### Pruebas de Rutas Protegidas
+1. Intentar acceder al dashboard sin iniciar sesión. Verificar que redirige a la página de inicio de sesión.
+2. Intentar eliminar un producto sin tener el rol de administrador. Verificar que la acción es rechazada.
+
+### Pruebas de Integridad
+1. **Crear y eliminar carritos**: Crear un carrito, agregar productos, y luego eliminar productos del carrito para confirmar el comportamiento esperado.
+2. **Pruebas de sesion y seguridad**: Verificar que un usuario autenticado solo pueda ver y modificar sus propios recursos.
+
+Para realizar estas pruebas, se recomienda utilizar herramientas como Postman, Insomnia o simplemente el navegador.
+

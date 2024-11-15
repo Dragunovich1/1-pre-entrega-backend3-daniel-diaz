@@ -95,12 +95,29 @@ button:hover {
   background-color: #45a049;
 }
 
+/* Botones específicos */
 .delete-btn {
   background-color: #f44336;
 }
 
 .delete-btn:hover {
   background-color: #e53935;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.add-cart-btn {
+  background-color: #5bc0de;
+}
+
+.add-cart-btn:hover {
+  background-color: #31b0d5;
 }
 
 /* Formularios */
@@ -126,4 +143,86 @@ footer {
   padding: 10px 0;
   text-align: center;
   margin-top: 20px;
+}
+
+/* /public/css/styles.css */
+
+/* Estilos generales */
+.container {
+  margin: 20px;
+}
+
+/* Estilos para el botón "Agregar Producto" */
+.btn-add-product {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px; /* Añadir margen inferior para separar el botón de la tabla */
+}
+
+.btn-add-product:hover {
+  background-color: #45a049;
+}
+
+/* Estilos del modal */
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Fijado en la ventana del navegador */
+  z-index: 1; /* Sobre otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Alto completo */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+}
+
+/* Contenido del modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* Centrar verticalmente */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%; /* Ancho del modal reducido para mejor visualización */
+  max-height: 75vh; /* Altura máxima del modal ajustada */
+  overflow-y: auto; /* Habilitar scroll vertical */
+  border-radius: 15px; /* Bordes más redondeados */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  scrollbar-width: none; /* Ocultar scrollbar en Firefox */
+}
+
+/* Estilo del scroll para navegadores basados en WebKit (Chrome, Safari) */
+.modal-content::-webkit-scrollbar {
+  width: 4px; /* Reducir el ancho del scrollbar para que sea menos intrusivo */
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent; /* Fondo transparente para el track del scrollbar */
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #bbb; /* Color del pulgar del scrollbar */
+  border-radius: 10px; /* Bordes redondeados del pulgar */
+  border: 2px solid transparent; /* Crear un espacio alrededor para que no interfiera con el borde */
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #888; /* Color del pulgar del scrollbar al pasar el cursor */
+}
+
+/* Botón de cerrar modal */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

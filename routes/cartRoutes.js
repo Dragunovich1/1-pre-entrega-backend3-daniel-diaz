@@ -3,11 +3,12 @@
 const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/cartController');
-const { authJWTMiddleware } = require('../middlewares/authMiddleware');
+const { authSessionMiddleware } = require('../middlewares/authMiddleware');
 
-
+// Ruta para agregar al carrito
+router.post('/add/:pid', authSessionMiddleware(['user', 'admin']), cartController.addToCart);
 
 // Ruta para finalizar la compra
-router.post('/:cid/purchase', authJWTMiddleware('user'), cartController.completePurchase);
+router.post('/:cid/purchase', authSessionMiddleware(['user']), cartController.completePurchase);
 
 module.exports = router;

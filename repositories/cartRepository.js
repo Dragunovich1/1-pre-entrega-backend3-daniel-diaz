@@ -1,23 +1,49 @@
 // /repositories/cartRepository.js
 
-const CartDAO = require('../daos/cartDao');
+const Cart = require('../models/cartModel');
 
 class CartRepository {
-  async getCartById(cartId) {
-    return await CartDAO.getCartById(cartId);
+  // Método para obtener el carrito por el ID del usuario
+  static async getCartByUser(userId) {
+    try {
+      return await Cart.findOne({ user: userId }).populate('products.product');
+    } catch (error) {
+      console.error('Error obteniendo el carrito por usuario:', error);
+      throw error;
+    }
   }
 
-  async getCartByUser(userId) {
-    return await CartDAO.getCartByUser(userId);
+  // Método para crear un nuevo carrito para el usuario
+  static async createCart(userId) {
+    try {
+      const newCart = new Cart({ user: userId, products: [] });
+      await newCart.save();
+      return newCart;
+    } catch (error) {
+      console.error('Error creando el carrito:', error);
+      throw error;
+    }
   }
 
-  async createCart(cartData) {
-    return await CartDAO.createCart(cartData);
+  // Método para obtener un carrito por su ID
+  static async getCartById(cartId) {
+    try {
+      return await Cart.findById(cartId).populate('products.product');
+    } catch (error) {
+      console.error('Error obteniendo el carrito por ID:', error);
+      throw error;
+    }
   }
 
-  async updateCart(cartId, cartData) {
-    return await CartDAO.updateCart(cartId, cartData);
+  // Método para guardar el carrito
+  static async saveCart(cart) {
+    try {
+      await cart.save();
+    } catch (error) {
+      console.error('Error guardando el carrito:', error);
+      throw error;
+    }
   }
 }
 
-module.exports = new CartRepository();
+module.exports = CartRepository;
