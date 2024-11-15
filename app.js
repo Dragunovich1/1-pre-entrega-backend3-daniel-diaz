@@ -14,6 +14,7 @@ const authRoutes = require('./routes/authRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const mocksRouter = require('./routes/mocks.router');
 
 // Importar express-handlebars y configurar
 const exphbs = require('express-handlebars');
@@ -37,7 +38,7 @@ const createAdminUser = async () => {
         last_name: 'User',
         email: adminEmail,
         password: hashedPassword,
-        age: 30, // O la edad que prefieras
+        age: 30,
         role: 'admin', // Asegurarse de que el rol es 'admin'
       });
       await admin.save();
@@ -87,10 +88,6 @@ mongoose
         eq: (a, b) => a === b,
         json: (context) => JSON.stringify(context, null, 2),
       },
-      runtimeOptions: {
-        allowProtoPropertiesByDefault: true,
-        allowProtoMethodsByDefault: true,
-      },
     });
 
     app.engine('handlebars', hbs.engine);
@@ -105,6 +102,7 @@ mongoose
     app.use('/dashboard', dashboardRoutes);
     app.use('/api/products', productRoutes);
     app.use('/api/carts', cartRoutes);
+    app.use('/api/mocks', mocksRouter);
 
     // Ruta principal
     app.get('/', (req, res) => {

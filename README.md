@@ -1,4 +1,4 @@
-# Proyecto Final - CoderHouse - Backend 3
+Proyecto Final - CoderHouse - Backend 3
 
 Alumno: Daniel Diaz
 
@@ -8,217 +8,325 @@ Docente: Luis Alejandro Mera
 
 Tutores: Abigail Salas, Alexis Coronel
 
-## Descripción del Proyecto
+Descripción del Proyecto
 
 Este proyecto es un servidor básico de e-commerce desarrollado con Node.js y Express. Permite gestionar productos y carritos de compra, ofreciendo funcionalidades como la adición, eliminación y actualización de productos en tiempo real mediante WebSockets.
 
-## Instalación
+Instalación
 
-### Requisitos Previos
+Requisitos Previos
 
-- Node.js v14 o superior
-- MongoDB
+Node.js v14 o superior
 
-### Pasos de Instalación
+MongoDB
 
-1. Clonar el repositorio:
+Pasos de Instalación
 
+Clonar el repositorio:
 
-   ```sh
-   git clone https://github.com/Dragunovich1/proyecto-final-backend-daniel-diaz
-   cd proyecto-final-backend-daniel-diaz
-   ```
+git clone https://github.com/Dragunovich1/proyecto-final-backend-daniel-diaz
+cd proyecto-final-backend-daniel-diaz
 
-2. Instalar las dependencias:
+Instalar las dependencias:
 
-   ```sh
-   npm install
-   ```
+npm install
 
-3. Configurar la base de datos:
+Configurar la base de datos:
 
-   Asegúrate de tener una instancia de MongoDB corriendo. Puedes usar la configuración por defecto en `mongodb://localhost:27017/base_de_datos` o modificar la configuración en `app.js`.
+Asegúrate de tener una instancia de MongoDB corriendo. Puedes usar la configuración por defecto en mongodb://localhost:27017/base_de_datos o modificar la configuración en app.js.
 
-## Ejecución del Servidor
+Ejecución del Servidor
 
-### Modo Desarrollo
+Modo Desarrollo
 
 Para ejecutar el servidor en modo desarrollo (con reinicio automático):
 
-   ```sh
-   npm run dev
-   ```
+npm run dev
 
-### Modo Producción
+Modo Producción
 
 Para ejecutar el servidor en modo producción:
 
-   ```sh
-   npm start
-   ```
+npm start
 
-El servidor estará corriendo en `http://localhost:8080`.
+El servidor estará corriendo en http://localhost:8080.
 
-## Vistas
+Vistas
 
-### Dashboard
+Dashboard
 
-- **URL**: `http://localhost:8080`
-- **Descripción**: Muestra la lista de productos disponibles, permite acceder al resto de las vistas, se pueden realizar todas las pruebas desde aquí.
+URL: http://localhost:8080
 
-### Agregar/modificar/eliminar productos
+Descripción: Muestra la lista de productos disponibles, permite acceder al resto de las vistas, se pueden realizar todas las pruebas desde aquí.
 
-- **URL**: `http://localhost:8080/realtimeproducts`
-- **Descripción**: Muestra una lista de productos que se actualiza en tiempo real. Permite agregar, modificar y eliminar productos.
+Agregar/modificar/eliminar productos
 
-### Carrito de Compras
+URL: http://localhost:8080/realtimeproducts
 
-- **URL**: `http://localhost:8080/carts/:cid`
-- **Descripción**: Muestra los productos en el carrito específico.
+Descripción: Muestra una lista de productos que se actualiza en tiempo real. Permite agregar, modificar y eliminar productos.
 
-### Detalle de Producto
+Carrito de Compras
 
-- **URL**: `http://localhost:8080/products/:pid`
-- **Descripción**: Muestra los detalles de un producto específico y permite agregarlo al carrito.
+URL: http://localhost:8080/carts/:cid
 
-## Instrucciones de Uso
+Descripción: Muestra los productos en el carrito específico.
 
-1. Ejecutar el servidor según el modo elegido.
-2. Acceder a las siguientes rutas desde el navegador:
+Detalle de Producto
 
-   - `http://localhost:8080` para ver el dashboard con la lista de productos.
-   - `http://localhost:8080/realtimeproducts` para gestionar productos en tiempo real.
-   - `http://localhost:8080/carts/:cid` para ver y gestionar el carrito de compras.
-   - `http://localhost:8080/products/:pid` para ver los detalles de un producto específico.
+URL: http://localhost:8080/products/:pid
 
-3. La interfaz gráfica del dashboard permite realizar todas las pruebas necesarias para gestionar productos y carritos.
+Descripción: Muestra los detalles de un producto específico y permite agregarlo al carrito.
 
-4. Iniciar sesión con el siguiente usuario administrador para realizar las pruebas:
+Instrucciones de Uso
 
-   - **Email**: `admin@example.com`
-   - **Password**: `adminpassword`
+Ejecutar el servidor según el modo elegido.
 
-## API y Pruebas Manuales
+Acceder a las siguientes rutas desde el navegador:
 
-### Productos
+http://localhost:8080 para ver el dashboard con la lista de productos.
 
-1. **Obtener productos con filtros, paginación y ordenamientos**
-   - **URL**: `GET /api/products`
-   - **Params**:
-     - `limit`: 10
-     - `page`: 1
-     - `sort`: `asc` o `desc`
-     - `query`: (categoría deseada)
-   - **Response**: Devuelve la estructura con paginación y productos.
+http://localhost:8080/realtimeproducts para gestionar productos en tiempo real.
 
-2. **Agregar un nuevo producto**
-   - **URL**: `POST /api/products`
-   - **Body (JSON)**:
-     ```json
-     {
-       "title": "Nuevo Producto",
-       "description": "Descripción del producto",
-       "code": "NP001",
-       "price": 100,
-       "stock": 50,
-       "category": "Categoría",
-       "status": true
-     }
-     ```
-   - **Response**: Devuelve el producto creado.
+http://localhost:8080/carts/:cid para ver y gestionar el carrito de compras.
 
-3. **Obtener producto por ID**
-   - **URL**: `GET /api/products/:pid`
-   - **Response**: Devuelve el producto con el ID especificado.
+http://localhost:8080/products/:pid para ver los detalles de un producto específico.
 
-4. **Actualizar un producto**
-   - **URL**: `PUT /api/products/:pid`
-   - **Body (JSON)**:
-     ```json
-     {
-       "title": "Producto Actualizado",
-       "description": "Descripción actualizada",
-       "price": 120
-     }
-     ```
-   - **Response**: Devuelve el producto actualizado.
+La interfaz gráfica del dashboard permite realizar todas las pruebas necesarias para gestionar productos y carritos.
 
-5. **Eliminar un producto**
-   - **URL**: `DELETE /api/products/:pid`
-   - **Response**: Devuelve un mensaje de confirmación de eliminación.
+Iniciar sesión con el siguiente usuario administrador para realizar las pruebas:
 
-### Carritos
+Email: admin@example.com
 
-1. **Crear un nuevo carrito**
-   - **URL**: `POST /api/carts`
-   - **Response**: Devuelve el carrito creado.
+Password: adminpassword
 
-2. **Obtener carrito por ID**
-   - **URL**: `GET /api/carts/:cid`
-   - **Response**: Devuelve el carrito con el ID especificado.
+API y Pruebas Manuales
 
-3. **Agregar producto al carrito**
-   - **URL**: `POST /api/carts/add/:pid`
-   - **Response**: Devuelve el carrito con el producto añadido.
+Productos
 
-4. **Eliminar un producto del carrito**
-   - **URL**: `DELETE /api/carts/:cid/products/:pid`
-   - **Response**: Devuelve el carrito con el producto eliminado.
+Obtener productos con filtros, paginación y ordenamientos
 
-### Usuarios
+URL: GET /api/products
 
-1. **Registrar un usuario**
-   - **URL**: `POST /api/auth/register`
-   - **Body (JSON)**:
-     ```json
-     {
-       "first_name": "Juan",
-       "last_name": "Pérez",
-       "email": "juan.perez@gmail.com",
-       "age": 30,
-       "password": "password123"
-     }
-     ```
-   - **Response**: Devuelve el usuario creado.
+Params:
 
-2. **Iniciar sesión**
-   - **URL**: `POST /api/auth/login`
-   - **Body (JSON)**:
-     ```json
-     {
-       "email": "juan.perez@gmail.com",
-       "password": "password123"
-     }
-     ```
-   - **Response**: Devuelve un token JWT si las credenciales son correctas.
+limit: 10
 
-3. **Obtener el usuario actual (basado en el JWT)**
-   - **URL**: `GET /api/sessions/current`
-   - **Response**: Devuelve los datos del usuario autenticado.
+page: 1
 
-## Testing - Set de Pruebas
+sort: asc o desc
 
-### Prueba de Autenticación
-1. Iniciar sesión con el usuario administrador proporcionado.
-2. Verificar que se redirige correctamente al dashboard.
+query: (categoría deseada)
 
-### Pruebas de Productos
-1. **Agregar un nuevo producto**: Desde el dashboard, añadir un producto y verificar que aparezca en la lista de productos.
-2. **Modificar producto existente**: Editar un producto desde la vista de productos y comprobar los cambios.
-3. **Eliminar un producto**: Eliminar un producto y verificar que desaparece de la lista.
+Response: Devuelve la estructura con paginación y productos.
 
-### Pruebas de Carrito
-1. **Agregar un producto al carrito**: Seleccionar un producto y agregarlo al carrito.
-2. **Verificar carrito**: Acceder a la vista del carrito y confirmar que los productos agregados están presentes con la cantidad correcta.
-3. **Finalizar compra**: Completar la compra y confirmar que el carrito se vacía.
+Agregar un nuevo producto
 
-### Pruebas de Rutas Protegidas
-1. Intentar acceder al dashboard sin iniciar sesión. Verificar que redirige a la página de inicio de sesión.
-2. Intentar eliminar un producto sin tener el rol de administrador. Verificar que la acción es rechazada.
+URL: POST /api/products
 
-### Pruebas de Integridad
-1. **Crear y eliminar carritos**: Crear un carrito, agregar productos, y luego eliminar productos del carrito para confirmar el comportamiento esperado.
-2. **Pruebas de sesion y seguridad**: Verificar que un usuario autenticado solo pueda ver y modificar sus propios recursos.
+Body (JSON):
 
-Para realizar estas pruebas, se recomienda utilizar herramientas como Postman, Insomnia o simplemente el navegador.
+{
+  "title": "Nuevo Producto",
+  "description": "Descripción del producto",
+  "code": "NP001",
+  "price": 100,
+  "stock": 50,
+  "category": "Categoría",
+  "status": true
+}
 
+Response: Devuelve el producto creado.
+
+Obtener producto por ID
+
+URL: GET /api/products/:pid
+
+Response: Devuelve el producto con el ID especificado.
+
+Actualizar un producto
+
+URL: PUT /api/products/:pid
+
+Body (JSON):
+
+{
+  "title": "Producto Actualizado",
+  "description": "Descripción actualizada",
+  "price": 120
+}
+
+Response: Devuelve el producto actualizado.
+
+Eliminar un producto
+
+URL: DELETE /api/products/:pid
+
+Response: Devuelve un mensaje de confirmación de eliminación.
+
+Carritos
+
+Crear un nuevo carrito
+
+URL: POST /api/carts
+
+Response: Devuelve el carrito creado.
+
+Obtener carrito por ID
+
+URL: GET /api/carts/:cid
+
+Response: Devuelve el carrito con el ID especificado.
+
+Agregar producto al carrito
+
+URL: POST /api/carts/add/:pid
+
+Response: Devuelve el carrito con el producto añadido.
+
+Eliminar un producto del carrito
+
+URL: DELETE /api/carts/:cid/products/:pid
+
+Response: Devuelve el carrito con el producto eliminado.
+
+Usuarios
+
+Registrar un usuario
+
+URL: POST /api/auth/register
+
+Body (JSON):
+
+{
+  "first_name": "Juan",
+  "last_name": "Pérez",
+  "email": "juan.perez@gmail.com",
+  "age": 30,
+  "password": "password123"
+}
+
+Response: Devuelve el usuario creado.
+
+Iniciar sesión
+
+URL: POST /api/auth/login
+
+Body (JSON):
+
+{
+  "email": "juan.perez@gmail.com",
+  "password": "password123"
+}
+
+Response: Devuelve un token JWT si las credenciales son correctas.
+
+Obtener el usuario actual (basado en el JWT)
+
+URL: GET /api/sessions/current
+
+Response: Devuelve los datos del usuario autenticado.
+
+Testing - Set de Pruebas
+
+Prueba de Autenticación
+
+Iniciar sesión con el usuario administrador proporcionado.
+
+Verificar que se redirige correctamente al dashboard.
+
+Pruebas de Productos
+
+Agregar un nuevo producto: Desde el dashboard, añadir un producto y verificar que aparezca en la lista de productos.
+
+Modificar producto existente: Editar un producto desde la vista de productos y comprobar los cambios.
+
+Eliminar un producto: Eliminar un producto y verificar que desaparece de la lista.
+
+Pruebas de Carrito
+
+Agregar un producto al carrito: Seleccionar un producto y agregarlo al carrito.
+
+Verificar carrito: Acceder a la vista del carrito y confirmar que los productos agregados están presentes con la cantidad correcta.
+
+Finalizar compra: Completar la compra y confirmar que el carrito se vacía.
+
+Pruebas de Rutas Protegidas
+
+Intentar acceder al dashboard sin iniciar sesión. Verificar que redirige a la página de inicio de sesión.
+
+Intentar eliminar un producto sin tener el rol de administrador. Verificar que la acción es rechazada.
+
+Pruebas de Integridad
+
+Crear y eliminar carritos: Crear un carrito, agregar productos, y luego eliminar productos del carrito para confirmar el comportamiento esperado.
+
+Pruebas de sesión y seguridad: Verificar que un usuario autenticado solo pueda ver y modificar sus propios recursos.
+
+Pruebas con Postman - Generación de Datos
+
+Endpoints a Probar con Postman
+
+GET /api/mocks/mockingusers
+
+Objetivo: Obtener una lista de 50 usuarios generados aleatoriamente usando Faker.
+
+URL: http://localhost:8080/api/mocks/mockingusers
+
+Tipo de Petición: GET
+
+Pasos para Probar:
+
+Selecciona GET en Postman y prueba la URL mencionada.
+
+Verifica que obtienes una lista de 50 usuarios.
+
+POST /api/mocks/generateData
+
+Objetivo: Generar e insertar en la base de datos la cantidad de usuarios y mascotas especificados.
+
+URL: http://localhost:8080/api/mocks/generateData
+
+Tipo de Petición: POST
+
+Headers: Content-Type: application/json
+
+Cuerpo:
+
+{
+  "users": 10,
+  "pets": 20
+}
+
+Pasos para Probar:
+
+Selecciona POST en Postman, agrega el JSON en el body y prueba la URL.
+
+Verifica que los datos se generen y guarden.
+
+GET /api/users
+
+Objetivo: Obtener todos los usuarios generados y almacenados en la base de datos.
+
+URL: http://localhost:8080/api/users
+
+Tipo de Petición: GET
+
+Pasos para Probar:
+
+Selecciona GET en Postman y prueba la URL mencionada.
+
+Verifica que obtienes todos los usuarios almacenados.
+
+GET /api/pets
+
+Objetivo: Obtener todas las mascotas generadas y almacenadas en la base de datos.
+
+URL: http://localhost:8080/api/pets
+
+Tipo de Petición: GET
+
+Pasos para Probar:
+
+Selecciona GET en Postman y prueba la URL mencionada.
+
+Verifica que obtienes todas las mascotas almacenadas.
