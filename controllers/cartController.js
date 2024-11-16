@@ -15,14 +15,11 @@ exports.addToCart = async (req, res) => {
       cart = await CartRepository.createCart(userId);
     }
 
-    // Buscamos el producto
-    const product = await ProductRepository.getProductById(productId);
-    if (!product) {
-      return res.status(404).json({ message: 'Producto no encontrado' });
-    }
+    // Limpiar productos nulos antes de proceder
+    cart.products = cart.products.filter(item => item.product !== null);
 
     // Verificamos si el producto ya está en el carrito
-    const existingProductIndex = cart.products.findIndex(item => item.product.equals(productId));
+    const existingProductIndex = cart.products.findIndex(item => item.product && item.product.equals(productId));
     if (existingProductIndex > -1) {
       cart.products[existingProductIndex].quantity += 1;  // Incrementamos la cantidad
     } else {
@@ -36,6 +33,7 @@ exports.addToCart = async (req, res) => {
     res.status(500).json({ message: 'Error al agregar producto al carrito', error });
   }
 };
+
 
 // Otra función: completePurchase
 exports.completePurchase = async (req, res) => {

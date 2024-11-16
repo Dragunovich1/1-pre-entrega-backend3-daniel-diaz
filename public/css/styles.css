@@ -251,3 +251,10 @@ footer {
   color: #721c24;
   border: 1px solid #f5c6cb;
 }
+
+.alert-warning {
+  background-color: #fff3cd; /* Un tono amarillo claro */
+  color: #856404; /* Un tono marrón oscuro, para buen contraste */
+  border: 1px solid #ffeeba; /* Un borde amarillo más suave */
+}
+
