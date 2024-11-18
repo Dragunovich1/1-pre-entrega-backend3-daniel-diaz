@@ -1,4 +1,4 @@
-Primera Pre-entrega - CoderHouse - Backend 3
+##Primera Pre-entrega - CoderHouse - Backend 3
 
 Alumno: Daniel Diaz
 
@@ -103,3 +103,21 @@ El servidor estará corriendo en [http://localhost:8080](http://localhost:8080).
 - **Pasos para Probar**:
   1. Selecciona POST en Postman, agrega el JSON en el body y prueba la URL.
   2. Verifica que obtienes la cantidad de usuarios solicitados generados aleatoriamente.
+
+#### GET /api/users
+
+- **Objetivo**: Obtener todos los usuarios generados y almacenados en la base de datos.
+- **URL**: [http://localhost:8080/api/users](http://localhost:8080/api/users)
+- **Tipo de Petición**: GET
+- **Pasos para Probar**:
+  1. Selecciona GET en Postman y prueba la URL mencionada.
+  2. Verifica que obtienes todos los usuarios almacenados.
+
+#### GET /api/pets
+
+- **Objetivo**: Obtener todas las mascotas generadas y almacenadas en la base de datos.
+- **URL**: [http://localhost:8080/api/pets](http://localhost:8080/api/pets)
+- **Tipo de Petición**: GET
+- **Pasos para Probar**:
+  1. Selecciona GET en Postman y prueba la URL mencionada.
+  2. Verifica que obtienes todas las mascotas almacenadas.
