@@ -3,13 +3,14 @@ const CartRepository = require('../repositories/cartRepository');
 const ProductRepository = require('../repositories/productRepository');
 const Ticket = require('../models/ticketModel');
 
+// Función para agregar al carrito
 exports.addToCart = async (req, res) => {
   const userId = req.session.user.id;  // Obtenemos el ID del usuario logueado
   const productId = req.params.pid;
 
   try {
     let cart = await CartRepository.getCartByUser(userId);
-    
+
     // Si no existe un carrito para el usuario, lo creamos
     if (!cart) {
       cart = await CartRepository.createCart(userId);
@@ -34,8 +35,29 @@ exports.addToCart = async (req, res) => {
   }
 };
 
+// Función para vaciar el carrito
+exports.emptyCart = async (req, res) => {
+  const userId = req.session.user.id;  // Obtenemos el ID del usuario logueado
 
-// Otra función: completePurchase
+  try {
+    let cart = await CartRepository.getCartByUser(userId);
+
+    if (!cart) {
+      return res.status(404).json({ message: 'No se encontró un carrito para este usuario' });
+    }
+
+    // Vaciamos el carrito
+    cart.products = [];
+    await cart.save();
+
+    res.json({ message: 'Carrito vaciado correctamente' });
+  } catch (error) {
+    console.error('Error al vaciar el carrito:', error);
+    res.status(500).json({ message: 'Error al vaciar el carrito', error });
+  }
+};
+
+// Función para completar la compra
 exports.completePurchase = async (req, res) => {
   const cartId = req.params.cid;
   const user = req.session.user;
