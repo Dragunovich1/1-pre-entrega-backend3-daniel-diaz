@@ -15,6 +15,8 @@ const dashboardRoutes = require('./routes/dashboardRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const mocksRouter = require('./routes/mocks.router');
+const dataRoutes = require('./routes/data.router');
+
 
 // Importar express-handlebars y configurar
 const exphbs = require('express-handlebars');
@@ -107,6 +109,7 @@ mongoose
     app.use('/api/products', productRoutes);
     app.use('/api/carts', cartRoutes);
     app.use('/api/mocks', mocksRouter);
+    app.use('/api', dataRoutes);
 
     // Ruta principal
     app.get('/', (req, res) => {

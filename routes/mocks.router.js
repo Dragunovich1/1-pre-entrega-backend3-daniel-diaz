@@ -1,104 +1,131 @@
+// /routes/mocks.router.js
+
 const express = require('express');
 const router = express.Router();
-const faker = require('faker'); // Utilizando faker versión 5.5.3
+const { faker } = require('@faker-js/faker');
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
 const Pet = require('../models/petModel');
+const CustomError = require('../utils/errorHandler'); // Asegurarse de que el módulo existe correctamente
+const generateUsers = require('../utils/userMockGenerator');
 
-// Endpoint para generar usuarios falsos
-router.get('/mockingusers', (req, res) => {
+/**
+ * @swagger
+ * tags:
+ *   name: Mocks
+ *   description: API para la generación de datos ficticios
+ */
+
+// Endpoint para generar mascotas ficticias
+router.get('/mockingpets', (req, res) => {
   try {
-    const users = [];
+    const pets = [];
+    for (let i = 0; i < 100; i++) {
+      pets.push({
+        name: faker.animal.dog(),
+        type: 'dog',
+        breed: faker.animal.dog(), // Añadir 'breed' que es requerido por el modelo
+        age: faker.number.int({ min: 1, max: 15 }),
+        adopted: false,
+        owner: null,
+      });
+    }
+    res.status(200).json(pets);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al generar mascotas ficticias', error });
+  }
+});
 
-    for (let i = 0; i < 50; i++) {
-      users.push({
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
+// Endpoint para generar usuarios ficticios
+router.get('/mockingusers', async (req, res) => {
+  try {
+    const users = await generateUsers(50);
+
+    // Simular el formato de una respuesta Mongo agregando un _id
+    const usersWithId = users.map(user => ({
+      ...user,
+      _id: faker.database.mongodbObjectId(),
+    }));
+
+    res.status(200).json(usersWithId);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al generar usuarios ficticios', error });
+  }
+});
+
+// Endpoint para generar datos e insertarlos en la base de datos
+router.post('/generateData', async (req, res) => {
+  try {
+    const { users, pets } = req.body;
+    const newUsers = [];
+    const newPets = [];
+
+    // Generar usuarios
+    for (let i = 0; i < users; i++) {
+      newUsers.push(
+        new User({
+          first_name: faker.person.firstName(),
+          last_name: faker.person.lastName(),
+          email: faker.internet.email(),
+          password: await bcrypt.hash('coder123', 10),
+          role: faker.helpers.arrayElement(['user', 'admin']),
+          age: faker.number.int({ min: 18, max: 70 }), // Añadir la edad aquí también
+          pets: [],
+        })
+      );
+    }
+
+    // Generar mascotas
+    for (let i = 0; i < pets; i++) {
+      newPets.push(
+        new Pet({
+          name: faker.animal.dog(),
+          type: 'dog',
+          breed: faker.animal.dog(), // Añadir 'breed' que es requerido por el modelo
+          age: faker.number.int({ min: 1, max: 15 }),
+          adopted: false,
+          owner: null,
+        })
+      );
+    }
+
+    // Guardar en la base de datos
+    await User.insertMany(newUsers);
+    await Pet.insertMany(newPets);
+
+    res.status(201).json({ message: 'Datos generados e insertados en la base de datos' });
+  } catch (error) {
+    console.error('Error al generar datos:', error); // Imprimir el error para depuración
+    res.status(500).json({ message: 'Error al generar e insertar datos', error });
+  }
+});
+
+// Endpoint para generar usuarios ficticios según el número indicado
+router.post('/generateUsers', async (req, res) => {
+  try {
+    const { users } = req.body; // Obtenemos la cantidad de usuarios desde la solicitud
+
+    if (!users || users <= 0) {
+      return res.status(400).json({ message: 'Debe proporcionar un número válido de usuarios.' });
+    }
+
+    const generatedUsers = [];
+
+    for (let i = 0; i < users; i++) {
+      generatedUsers.push({
+        first_name: faker.person.firstName(),
+        last_name: faker.person.lastName(),
         email: faker.internet.email(),
-        password: bcrypt.hashSync('coder123', 10), // Contraseña encriptada
-        role: faker.random.arrayElement(['user', 'admin']),
+        password: await bcrypt.hash('coder123', 10),
+        role: faker.helpers.arrayElement(['user', 'admin']),
         pets: [],
       });
     }
 
-    res.json(users);
+    res.status(200).json(generatedUsers); // Devolvemos los usuarios generados
   } catch (error) {
-    console.error('Error al generar usuarios falsos:', error);
-    res.status(500).json({ error: 'Error generando usuarios' });
+    res.status(500).json({ message: 'Error al generar usuarios', error });
   }
 });
-
-// Endpoint para generar usuarios y mascotas en la base de datos
-router.post('/generateData', async (req, res) => {
-  try {
-    const { users, pets } = req.body;
-
-    if (!users || !pets) {
-      return res.status(400).json({ error: 'Faltan parámetros "users" y "pets"' });
-    }
-
-    const generatedUsers = [];
-    console.log(`Generando ${users} usuarios...`);
-
-    for (let i = 0; i < users; i++) {
-      try {
-        const newUser = new User({
-          first_name: faker.name.firstName(),
-          last_name: faker.name.lastName(),
-          email: faker.internet.email(),
-          password: bcrypt.hashSync('coder123', 10), // Contraseña encriptada
-          role: faker.random.arrayElement(['user', 'admin']),
-          pets: [],
-          age: faker.datatype.number({ min: 18, max: 65 }), // Generar una edad entre 18 y 65
-        });
-
-        const savedUser = await newUser.save();
-        generatedUsers.push(savedUser);
-        console.log(`Usuario ${savedUser.first_name} ${savedUser.last_name} generado y guardado correctamente.`);
-      } catch (userError) {
-        console.error('Error al guardar usuario:', userError);
-      }
-    }
-
-    if (generatedUsers.length === 0) {
-      console.error("No se generaron usuarios correctamente, no se procederá con la generación de mascotas.");
-      return res.status(500).json({ error: 'No se generaron usuarios, no se pueden crear mascotas' });
-    }
-
-    const generatedPets = [];
-    console.log(`Generando ${pets} mascotas...`);
-
-    for (let i = 0; i < pets; i++) {
-      try {
-        const randomUser = faker.random.arrayElement(generatedUsers);
-
-        if (!randomUser) {
-          console.warn('No hay usuarios disponibles para asignar mascotas.');
-          continue;
-        }
-
-        const newPet = new Pet({
-          name: faker.name.firstName(),
-          type: faker.animal.type(),
-          age: faker.datatype.number({ min: 1, max: 15 }),
-          breed: faker.animal.cat(), // Generar una raza para la mascota
-          owner: randomUser._id, // Asignar una mascota a un usuario aleatorio
-        });
-
-        const savedPet = await newPet.save();
-        generatedPets.push(savedPet);
-        console.log(`Mascota ${savedPet.name} guardada correctamente, asignada al usuario ${randomUser.first_name} ${randomUser.last_name}`);
-      } catch (petError) {
-        console.error('Error al guardar mascota:', petError);
-      }
-    }
-
-    res.json({ users: generatedUsers, pets: generatedPets });
-  } catch (error) {
-    console.error('Error al generar datos:', error);
-    res.status(500).json({ error: 'Error generando datos' });
-  }
-});
-
 
 module.exports = router;

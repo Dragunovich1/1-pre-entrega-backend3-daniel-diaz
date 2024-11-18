@@ -1,4 +1,4 @@
-Proyecto Final - CoderHouse - Backend 3
+Primera Pre-entrega - CoderHouse - Backend 3
 
 Alumno: Daniel Diaz
 
@@ -67,13 +67,13 @@ Descripción: Muestra una lista de productos que se actualiza en tiempo real. Pe
 
 Carrito de Compras
 
-URL: http://localhost:8080/carts/:cid
+URL: http://localhost:8080/carts/
 
 Descripción: Muestra los productos en el carrito específico.
 
 Detalle de Producto
 
-URL: http://localhost:8080/products/:pid
+URL: http://localhost:8080/products/
 
 Descripción: Muestra los detalles de un producto específico y permite agregarlo al carrito.
 
@@ -87,9 +87,9 @@ http://localhost:8080 para ver el dashboard con la lista de productos.
 
 http://localhost:8080/realtimeproducts para gestionar productos en tiempo real.
 
-http://localhost:8080/carts/:cid para ver y gestionar el carrito de compras.
+http://localhost:8080/carts/ para ver y gestionar el carrito de compras.
 
-http://localhost:8080/products/:pid para ver los detalles de un producto específico.
+http://localhost:8080/products/ para ver los detalles de un producto específico.
 
 La interfaz gráfica del dashboard permite realizar todas las pruebas necesarias para gestionar productos y carritos.
 
@@ -301,7 +301,7 @@ Pasos para Probar:
 
 Selecciona POST en Postman, agrega el JSON en el body y prueba la URL.
 
-Verifica que los datos se generen y guarden.
+Verifica que los datos se generen y guarden correctamente en la base de datos.
 
 GET /api/users
 
@@ -330,3 +330,28 @@ Pasos para Probar:
 Selecciona GET en Postman y prueba la URL mencionada.
 
 Verifica que obtienes todas las mascotas almacenadas.
+
+POST /api/mocks/generateUsers
+
+Objetivo: Generar una cantidad específica de usuarios con los siguientes atributos: contraseña encriptada, rol aleatorio entre "user" y "admin", y un array vacío de mascotas.
+
+URL: http://localhost:8080/api/mocks/generateUsers
+
+Tipo de Petición: POST
+
+Headers: Content-Type: application/json
+
+Cuerpo:
+
+{
+  "users": 15
+}
+
+Pasos para Probar:
+
+Selecciona POST en Postman y prueba la URL mencionada, agregando la cantidad de usuarios en el body.
+
+Verifica que obtienes la cantidad de usuarios generados con los atributos correctos.
+
+Consideraciones Finales
+Este proyecto tiene como finalidad cubrir los requisitos de la primera pre-entrega del curso de Backend en CoderHouse. El proyecto incluye la gestión completa de productos, carritos y usuarios, así como funcionalidades de autenticación, generación de datos ficticios para pruebas y visualización en tiempo real mediante WebSockets.
