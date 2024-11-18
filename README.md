@@ -58,6 +58,15 @@ npm start
 
 El servidor estará corriendo en [http://localhost:8080](http://localhost:8080).
 
+### Usuario Administrador Predeterminado
+
+Al arrancar el servidor, se genera un usuario administrador con las siguientes credenciales para realizar las pruebas:
+
+- **Email**: `admin@example.com`
+- **Password**: `adminpassword`
+
+### Endpoints a Probar con Postman
+
 ## Pruebas con Postman - Generación de Datos
 
 ### Endpoints a Probar con Postman
